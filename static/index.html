@@ -1,0 +1,4022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N8N Workflow Automation Templates | Lumenosis</title>
+  <meta name="description" content="Browse, search and filter a comprehensive collection of production-ready N8N workflow automation templates. Find automation solutions, documentation, and best practices for your business needs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+  <style>
+    /* Modern CSS Reset and Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Lumenosis Brand Colors */
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #6366f1;
+      --accent: #06b6d4;
+      --accent-dark: #0891b2;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      
+      /* Light Theme */
+      --bg: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --bg-card: #ffffff;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --border-hover: #cbd5e1;
+      
+      /* Enhanced Shadows */
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      
+      /* Modern Glass Effect */
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --backdrop-blur: blur(10px);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      --bg-card: #1e293b;
+      --text: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --border: #475569;
+      --border-hover: #64748b;
+      --glass-bg: rgba(30, 41, 59, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      
+      /* Enhanced dark mode text contrast */
+      --text: #f0f0f0;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+    }
+    
+    /* Clean themes - only Light and Dark */
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: all 0.2s ease;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Enhanced Header with Gradient - Ultra Compact */
+    .header {
+      background: var(--bg-gradient);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0 0.75rem 0; /* Further reduced from 1.5rem 0 1rem 0 */
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="7" cy="7" r="2"/><circle cx="23" cy="7" r="2"/><circle cx="39" cy="7" r="2"/><circle cx="7" cy="23" r="2"/><circle cx="23" cy="23" r="2"/><circle cx="39" cy="23" r="2"/><circle cx="7" cy="39" r="2"/><circle cx="23" cy="39" r="2"/><circle cx="39" cy="39" r="2"/></g></g></svg>') repeat;
+      opacity: 0.5;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-link {
+      display: inline-block;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .brand-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .brand-link::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .brand-link:hover::before {
+      opacity: 1;
+      animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .lumenosis-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: var(--backdrop-blur);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 0.875rem 1.5rem;
+      border-radius: 2rem;
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+    }
+
+    .lumenosis-badge:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.4);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lumenosis-badge span:first-child {
+      font-size: 1.25rem;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    }
+
+    .title {
+      font-size: 2rem; /* Reduced from 2.25rem */
+      font-weight: 800;
+      margin-bottom: 0.375rem; /* Reduced from 0.5rem */
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .clickable-title {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .clickable-title:hover {
+      transform: scale(1.02);
+      filter: brightness(1.1);
+    }
+
+    .clickable-title:active {
+      transform: scale(0.98);
+    }
+
+    .subtitle {
+      font-size: 0.875rem; /* Reduced from 1rem */
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem; /* Reduced from 1rem */
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      font-weight: 400;
+      max-width: 500px; /* Reduced from 600px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem; /* Reduced from 0.75rem */
+      justify-content: center;
+      max-width: 400px; /* Reduced from 500px */
+      margin: 0 auto;
+    }
+
+    .stat {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: var(--backdrop-blur);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem; /* Reduced from 0.75rem */
+      padding: 0.5rem 0.375rem; /* Reduced from 0.75rem 0.5rem */
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.25rem; /* Reduced from 1.5rem */
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem; /* Reduced from 0.7rem */
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* Controls - Matches search bar styling */
+    .controls {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: var(--backdrop-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 0.75rem auto 1rem auto;
+      max-width: 1200px;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+
+
+    .filter-section {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .filter-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .filter-group select {
+      padding: 0.625rem 0.875rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-width: 120px;
+    }
+
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    /* Ensure proper text contrast in all themes */
+    .filter-group label,
+    .filter-group select,
+    .theme-toggle,
+    .quick-categories-title {
+      color: var(--text);
+    }
+
+    .filter-group select option {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .filter-group select:hover {
+      border-color: var(--primary-light);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .filter-group:hover label {
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.75rem;
+      padding: 0.625rem 1rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.2s ease;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+
+
+    /* Hero Search Bar - Static initially, floating on scroll */
+    .hero-search {
+      background: var(--glass-bg);
+      backdrop-filter: var(--backdrop-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 0.875rem; /* Reduced from 1rem */
+      margin: 0.75rem auto; /* Reduced from 1rem auto */
+      max-width: 700px; /* Reduced from 800px */
+      box-shadow: var(--shadow-lg);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-search.floating {
+      position: fixed;
+      top: 0.5rem; /* Reduced from 1rem */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 700px;
+      z-index: 1000;
+      margin: 0;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .hero-search-input {
+      width: 100%;
+      padding: 0.75rem 1rem; /* Reduced from 0.875rem 1.25rem */
+      border: none;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      font-size: 0.875rem; /* Reduced from 1rem */
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .hero-search-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    .hero-search-help {
+      margin-top: 0.375rem; /* Reduced from 0.5rem */
+      text-align: center;
+      font-size: 0.7rem; /* Reduced from 0.75rem */
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+
+    /* Quick Category Navigation - Matches search bar styling */
+    .quick-categories {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: var(--backdrop-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 0.5rem auto 1rem auto;
+      max-width: 1200px;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(20px);
+      position: relative;
+    }
+
+    .quick-categories.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick-categories-title {
+      font-size: 0.875rem; /* Reduced from 1rem */
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem; /* Reduced from 0.75rem */
+      text-align: center;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem; /* Reduced from 0.5rem */
+      justify-content: center;
+    }
+
+    .category-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.25rem;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: category-btn-entrance 0.6s ease-out forwards;
+    }
+
+    /* Staggered animation for category buttons */
+    .category-btn:nth-child(1) { animation-delay: 0.1s; }
+    .category-btn:nth-child(2) { animation-delay: 0.15s; }
+    .category-btn:nth-child(3) { animation-delay: 0.2s; }
+    .category-btn:nth-child(4) { animation-delay: 0.25s; }
+    .category-btn:nth-child(5) { animation-delay: 0.3s; }
+    .category-btn:nth-child(6) { animation-delay: 0.35s; }
+    .category-btn:nth-child(7) { animation-delay: 0.4s; }
+    .category-btn:nth-child(8) { animation-delay: 0.45s; }
+
+    .category-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Mobile Responsive for Ultra-Compact Hero */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem 0 0.5rem 0; /* Further reduced */
+      }
+      
+      .title {
+        font-size: 1.75rem; /* Further reduced */
+      }
+      
+      .subtitle {
+        font-size: 0.8rem; /* Further reduced */
+        margin-bottom: 0.5rem; /* Further reduced */
+      }
+      
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.375rem; /* Further reduced */
+        max-width: 300px; /* Further reduced */
+      }
+      
+      .stat {
+        padding: 0.375rem 0.25rem; /* Further reduced */
+      }
+      
+      .stat-number {
+        font-size: 1.125rem; /* Further reduced */
+      }
+      
+      .stat-label {
+        font-size: 0.6rem; /* Further reduced */
+      }
+      
+      .hero-search {
+        margin: 0.5rem auto; /* Further reduced */
+        padding: 0.625rem; /* Further reduced */
+      }
+      
+      .hero-search.floating {
+        top: 0.25rem; /* Further reduced */
+        width: 95%;
+      }
+      
+      .quick-categories {
+        padding: 0.75rem; /* Further reduced */
+        margin: 0.5rem auto; /* Center and reduce */
+        max-width: 95%;
+      }
+
+      .category-buttons {
+        gap: 0.25rem; /* Tighter spacing */
+      }
+      
+      .quick-categories-title {
+        font-size: 0.8rem; /* Further reduced */
+        margin-bottom: 0.375rem; /* Further reduced */
+      }
+      
+      .category-btn {
+        padding: 0.1875rem 0.5rem; /* Further reduced */
+        font-size: 0.7rem; /* Further reduced */
+      }
+      
+      .controls {
+        padding: 0.75rem; /* Further reduced */
+        margin-bottom: 0.75rem; /* Further reduced */
+      }
+      
+      .main {
+        margin-top: -0.25rem; /* Further reduced */
+        border-radius: 1rem 1rem 0 0; /* Further reduced */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 0.75rem 0 0.375rem 0; /* Further reduced */
+      }
+      
+      .title {
+        font-size: 1.5rem; /* Further reduced */
+      }
+      
+      .subtitle {
+        font-size: 0.7rem; /* Further reduced */
+      }
+      
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.25rem; /* Further reduced */
+      }
+      
+      .stat {
+        padding: 0.25rem 0.1875rem; /* Further reduced */
+      }
+      
+      .stat-number {
+        font-size: 1rem; /* Further reduced */
+      }
+      
+      .stat-label {
+        font-size: 0.55rem; /* Further reduced */
+      }
+      
+      .hero-search {
+        margin: 0.375rem auto; /* Further reduced */
+        padding: 0.5rem; /* Further reduced */
+      }
+      
+      .hero-search.floating {
+        top: 0.125rem; /* Further reduced */
+        width: 98%;
+      }
+      
+      .quick-categories {
+        padding: 0.5rem; /* Further reduced */
+        margin: 0.375rem auto; /* Center and reduce */
+        max-width: 98%;
+      }
+
+      .category-buttons {
+        gap: 0.1875rem; /* Even tighter spacing */
+        justify-content: center;
+      }
+      
+      .category-btn {
+        padding: 0.125rem 0.375rem; /* Further reduced */
+        font-size: 0.65rem; /* Further reduced */
+      }
+      
+      .controls {
+        padding: 0.625rem; /* Further reduced */
+        margin-bottom: 0.5rem; /* Further reduced */
+      }
+      
+      .main {
+        margin-top: 0; /* No negative margin on very small screens */
+        border-radius: 0.75rem 0.75rem 0 0; /* Further reduced */
+      }
+    }
+
+    /* Extra Small Mobile */
+    @media (max-width: 480px) {
+      .controls {
+        padding: 0.75rem 0;
+      }
+      
+      .search-section {
+        margin-bottom: 0.5rem;
+      }
+      
+      .filter-section {
+        gap: 0.375rem;
+        margin-top: 0.5rem;
+      }
+      
+      .filter-group select {
+        padding: 0.25rem 0.375rem;
+        font-size: 0.7rem;
+        min-width: 70px;
+      }
+      
+      .quick-categories {
+        padding: 0.75rem;
+        margin-top: 0.75rem;
+      }
+      
+      .category-btn {
+        padding: 0.25rem 0.625rem;
+        font-size: 0.7rem;
+      }
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .category-btn {
+      background: rgba(255, 255, 255, 0.8); /* Add transparency */
+      backdrop-filter: blur(5px); /* Add backdrop blur */
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .category-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-brand:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .footer-description {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-copyright {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Main Content */
+    .main {
+      background: linear-gradient(
+        to bottom,
+        var(--bg-secondary) 0%,
+        var(--bg) 50px /* Reduced from 100px */
+      );
+      padding-top: 1rem; /* Reduced from 2rem */
+      margin-top: -0.5rem; /* Reduced from -1rem */
+      border-radius: 1.5rem 1.5rem 0 0; /* Reduced from 2rem 2rem 0 0 */
+      position: relative;
+    }
+
+    .main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0.5rem; /* Reduced from 1rem */
+      background: var(--bg-secondary);
+      border-radius: 1.5rem 1.5rem 0 0;
+    }
+
+    /* States */
+    .state {
+      text-align: center;
+      padding: 4rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .state .icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .state h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .state p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .retry-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .retry-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Enhanced Workflow Grid - Fully Responsive with Fluid Layout */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.25rem; /* Reduced from 1.5rem */
+      margin-top: 1rem; /* Reduced from 2rem */
+      padding-top: 0.5rem; /* Reduced from 1rem */
+    }
+
+    .workflow-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: clamp(0.75rem, 2vw, 1rem);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      /* Fully responsive sizing */
+      min-height: auto;
+      width: 100%;
+      max-width: 100%;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      /* Responsive typography */
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      /* Performance optimizations for animations */
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+
+
+
+    /* Enhanced animated left border with curved integration */
+    .workflow-card::before {
+      content: '';
+      position: absolute;
+      bottom: 8px; /* Start from bottom for bottom-to-top animation */
+      left: 0;
+      width: 4px;
+      height: 0; /* Start with 0 height */
+      background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
+      background-size: 200% 200%;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-2px); /* Initial state for entrance animation */
+      transform-origin: bottom;
+      border-radius: 0 4px 4px 0; /* Rounded top edge */
+      box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+      /* Mask for curved integration */
+      mask: linear-gradient(to right, transparent 0%, black 100%);
+      -webkit-mask: linear-gradient(to right, transparent 0%, black 100%);
+    }
+
+    .workflow-card::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+      border-radius: 1.25rem;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: blur(12px);
+    }
+
+    .workflow-card:hover {
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 40px rgba(79, 70, 229, 0.4),
+        0 0 80px rgba(79, 70, 229, 0.2),
+        0 0 120px rgba(79, 70, 229, 0.1);
+      border-color: var(--primary-light);
+      transform: translateY(-12px) scale(1.03);
+      background: var(--glass-bg);
+      backdrop-filter: var(--backdrop-blur);
+    }
+
+    /* Enhanced text contrast on hover */
+    .workflow-card:hover .workflow-title {
+      color: var(--text);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .workflow-card:hover .workflow-description {
+      color: var(--text);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .workflow-card:hover::before {
+      opacity: 1;
+      width: 6px;
+      height: calc(100% - 16px); /* Animate height from bottom to top */
+      transform: translateX(0); /* Slide in from left */
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 0 16px rgba(79, 70, 229, 0.6);
+      animation: left-border-pulse 2s ease-in-out infinite, left-border-gradient 3s ease-in-out infinite;
+      /* Enhanced curved integration on hover */
+      bottom: 8px; /* Keep bottom anchor for bottom-to-top growth */
+      mask: linear-gradient(to right, transparent 0%, black 80%, black 100%);
+      -webkit-mask: linear-gradient(to right, transparent 0%, black 80%, black 100%);
+    }
+
+    .workflow-card:hover::after {
+      opacity: 0.8;
+    }
+
+    .workflow-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .workflow-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .status-active {
+      background: var(--success);
+    }
+
+    .status-inactive {
+      background: var(--text-muted);
+    }
+
+    .complexity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .complexity-low {
+      background: var(--success);
+    }
+
+    .complexity-medium {
+      background: var(--warning);
+    }
+
+    .complexity-high {
+      background: var(--error);
+    }
+
+    .trigger-badge {
+      background: var(--primary);
+      color: white;
+      padding: 0.375rem 0.875rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+    }
+
+    .category-badge {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: clamp(0.2rem, 1vw, 0.25rem) clamp(0.5rem, 1.5vw, 0.625rem);
+      border-radius: clamp(0.5rem, 1.5vw, 0.75rem);
+      font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      margin-right: clamp(0.4rem, 1vw, 0.5rem);
+      /* Ensure category names are fully visible */
+      white-space: nowrap;
+      /* Responsive sizing */
+      min-width: fit-content;
+    }
+
+    .workflow-title {
+      font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+      font-weight: 700;
+      margin-bottom: clamp(0.75rem, 2vw, 1rem);
+      color: var(--text);
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      /* Ensure full titles are visible - no text clipping */
+      letter-spacing: -0.025em;
+      /* Force text to wrap and show completely */
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+      display: -webkit-box;
+      -webkit-line-clamp: unset;
+      -webkit-box-orient: vertical;
+      /* Responsive spacing */
+      padding: clamp(0.5rem, 1vw, 0.75rem) 0;
+      /* CRITICAL: Ensure titles never get cut off */
+      min-height: auto;
+      height: auto;
+      max-height: none;
+      /* Force proper text wrapping */
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .workflow-description {
+      color: var(--text-secondary);
+      margin-bottom: clamp(1rem, 2.5vw, 1.25rem);
+      line-height: 1.6;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      /* Ensure full descriptions are visible - no text clipping */
+      font-size: clamp(0.8rem, 1.8vw, 0.875rem);
+      font-weight: 400;
+      flex-grow: 1;
+      /* Force text to wrap and show completely */
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+      display: -webkit-box;
+      -webkit-line-clamp: unset;
+      -webkit-box-orient: vertical;
+      /* Responsive spacing */
+      padding: clamp(0.5rem, 1vw, 0.75rem) 0;
+    }
+
+    .workflow-integrations {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .integrations-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .integrations-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      min-height: 32px;
+    }
+
+    .integration-tag {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.75rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      /* Remove max-width to show full integration names */
+    }
+
+    .integration-tag:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .workflow-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.375rem;
+      background: var(--bg);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Load More Button Enhanced */
+    .load-more-container {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+    }
+
+    .load-more-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+    }
+
+    .load-more-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .load-more-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Workflow Card Animations */
+    .workflow-card {
+      animation: card-fade-in 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .workflow-card:nth-child(1) { animation-delay: 0.1s; }
+    .workflow-card:nth-child(2) { animation-delay: 0.2s; }
+    .workflow-card:nth-child(3) { animation-delay: 0.3s; }
+    .workflow-card:nth-child(4) { animation-delay: 0.4s; }
+    .workflow-card:nth-child(5) { animation-delay: 0.5s; }
+    .workflow-card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes card-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width: 768px) {
+      
+      .main {
+        margin-top: -0.5rem;
+        border-radius: 1.5rem 1.5rem 0 0;
+      }
+      
+      .controls {
+        padding: 1.25rem;
+        margin: 1rem auto 1.5rem auto;
+        max-width: 95%;
+      }
+
+      .filter-section {
+        gap: 1rem;
+      }
+
+      .filter-group select {
+        min-width: 100px;
+      }
+      
+      .quick-categories {
+        padding: 1.25rem;
+        margin: 1.25rem 0 1.5rem 0;
+      }
+      
+      /* Tablet-optimized workflow card animations */
+      .workflow-card::before {
+        transition: all 0.4s ease; /* Slightly faster on tablets */
+      }
+      
+      .workflow-card:hover::before {
+        animation: left-border-pulse 1.8s ease-in-out infinite, left-border-gradient 2.5s ease-in-out infinite; /* Slightly faster on tablets */
+      }
+    }
+
+    @media (max-width: 480px) {
+      
+      .main {
+        margin-top: 0;
+        border-radius: 1rem 1rem 0 0;
+      }
+      
+      .controls {
+        padding: 1rem;
+        margin: 0.75rem auto 1rem auto;
+        max-width: 98%;
+      }
+
+      .filter-section {
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+
+      .filter-group select {
+        min-width: auto;
+        width: 100%;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        align-self: center;
+      }
+      
+      .quick-categories {
+        padding: 1rem;
+        margin: 1rem 0 1.25rem 0;
+      }
+      
+      .workflow-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+          /* Mobile-optimized workflow card animations */
+    .workflow-card::before {
+      width: 3px; /* Slightly thinner on mobile */
+      transition: all 0.3s ease; /* Faster animation on mobile */
+      top: 6px; /* Adjusted inset for mobile */
+      height: calc(100% - 12px);
+    }
+    
+    .workflow-card:hover::before {
+      width: 5px; /* Slightly thinner hover state on mobile */
+      animation: left-border-pulse 1.5s ease-in-out infinite, left-border-gradient 2s ease-in-out infinite; /* Faster animations on mobile */
+      top: 4px; /* Less inset on mobile hover */
+      height: calc(100% - 8px);
+    }
+
+          /* Mobile scroll animations - slightly faster */
+      .workflow-card {
+        transition: all 0.3s ease;
+      }
+      
+      .workflow-card:nth-child(1) { transition-delay: 0ms; }
+      .workflow-card:nth-child(2) { transition-delay: 25ms; }
+      .workflow-card:nth-child(3) { transition-delay: 50ms; }
+      .workflow-card:nth-child(4) { transition-delay: 75ms; }
+      .workflow-card:nth-child(5) { transition-delay: 100ms; }
+      .workflow-card:nth-child(6) { transition-delay: 125ms; }
+
+      /* Mobile inline loader */
+      .inline-loader {
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+
+      .spinner {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      .loading-text {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: var(--bg);
+      border-radius: 0.75rem;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      color: var(--text-secondary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .workflow-detail {
+      margin-bottom: 1rem;
+    }
+
+    .workflow-detail h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .copy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .copy-btn.copied {
+      background: var(--success);
+    }
+
+    .copy-btn.copied:hover {
+      background: var(--success);
+    }
+
+    .json-viewer {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      overflow-x: auto;
+      max-height: 400px;
+      white-space: pre-wrap;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Mermaid diagram styling */
+    .mermaid {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Modern Fluid Responsive Design - No Fixed Breakpoints */
+    
+    /* Container responsive adjustments */
+    .container {
+      width: 100%;
+      max-width: min(95vw, 1400px);
+      margin: 0 auto;
+      padding: clamp(1rem, 3vw, 2rem);
+    }
+    
+    /* Modern CSS - Responsive search and filter sections with proper translucence */
+    .search-section,
+    .filter-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(0.5rem, 1.5vw, 0.75rem);
+      align-items: center;
+      justify-content: space-between;
+      /* Compact vertical spacing */
+      padding: clamp(0.5rem, 1.5vw, 1rem);
+      margin: clamp(0.25rem, 1vw, 0.5rem) 0;
+      /* Modern translucence for both themes */
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: clamp(0.5rem, 1.5vw, 0.75rem);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      /* Smooth transitions */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Theme-specific translucence */
+    [data-theme="light"] .filter-section {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    
+    [data-theme="dark"] .filter-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(0.5rem, 1.5vw, 1rem);
+      align-items: center;
+    }
+    
+
+    
+    /* Responsive workflow header */
+    .workflow-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(0.5rem, 1.5vw, 1rem);
+      margin-bottom: clamp(1rem, 2.5vw, 1.25rem);
+      padding-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+    }
+    
+    .workflow-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(0.5rem, 1.5vw, 0.75rem);
+      font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    }
+    
+    /* Responsive modal */
+    .modal-content {
+      width: min(95vw, 800px);
+      max-height: min(90vh, 600px);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      border-radius: clamp(0.75rem, 2vw, 1rem);
+    }
+    
+    .modal-header {
+      padding-bottom: clamp(0.75rem, 2vw, 1rem);
+      margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+    }
+    
+    .modal-title {
+      font-size: clamp(1.25rem, 3vw, 1.5rem);
+    }
+    
+    /* Responsive buttons */
+    .btn {
+      padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.25rem);
+      font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+      border-radius: clamp(0.5rem, 1.5vw, 0.75rem);
+      min-width: fit-content;
+    }
+    
+    /* Responsive spacing utilities */
+    .mt-responsive { margin-top: clamp(1rem, 2.5vw, 1.5rem); }
+    .mb-responsive { margin-bottom: clamp(1rem, 2.5vw, 1.5rem); }
+    .p-responsive { padding: clamp(1rem, 2.5vw, 1.5rem); }
+    .gap-responsive { gap: clamp(1rem, 2.5vw, 1.5rem); }
+
+    .footer-links {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+
+
+    /* Enhanced Scroll animations with better easing */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translateY(30px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Intersection Observer Classes */
+    .animate-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-left {
+      animation: slideInLeft 0.6s ease-out forwards;
+    }
+
+    .animate-right {
+      animation: slideInRight 0.6s ease-out forwards;
+    }
+
+    /* Enhanced dark theme underglow */
+    [data-theme="dark"] .workflow-card:hover {
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(79, 70, 229, 0.6),
+        0 0 80px rgba(79, 70, 229, 0.3),
+        0 0 120px rgba(79, 70, 229, 0.15);
+    }
+
+    [data-theme="dark"] .workflow-card:hover::after {
+      opacity: 1;
+      filter: blur(15px);
+    }
+
+    /* Enhanced text contrast for dark mode on hover */
+    [data-theme="dark"] .workflow-card:hover .workflow-title {
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    [data-theme="dark"] .workflow-card:hover .workflow-description {
+      color: #e2e8f0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Workflow Grid */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+    }
+
+
+    /* Compact Inline Loading Spinner */
+    .inline-loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      background: var(--bg-secondary);
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      margin: 1rem 0;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    /* No Results Message for Empty Categories */
+    .no-results-message {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+
+    .no-results-message .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    .no-results-message h3 {
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .no-results-message p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .back-to-all-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .back-to-all-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Ensure consistent spacing when loader is hidden */
+    .workflow-grid:not(:empty) {
+      margin-top: 0;
+    }
+
+    .inline-loader.hidden {
+      display: none;
+    }
+
+    .spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid var(--border);
+      border-top: 2px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+
+
+    /* Page Scroll Prevention During Loading */
+    .page-loading {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .page-loading .main {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Smooth Content Reveal */
+    .content-ready {
+      animation: content-fade-in 0.6s ease-out;
+    }
+
+    @keyframes content-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes left-border-pulse {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(79, 70, 229, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(79, 70, 229, 0.7);
+      }
+    }
+
+    @keyframes left-border-gradient {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 0% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
+
+    @keyframes card-glow {
+      0% {
+        box-shadow: 0 0 0 rgba(79, 70, 229, 0);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 0 rgba(79, 70, 229, 0);
+      }
+    }
+
+    @keyframes left-border-entrance {
+      0% {
+        opacity: 0;
+        transform: scaleY(0) translateX(-2px);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scaleY(0.5) translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scaleY(0) translateX(0);
+      }
+    }
+
+    @keyframes category-btn-entrance {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll-triggered card animations */
+    .workflow-card {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .workflow-card.animate-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Enhanced entrance effect */
+    .workflow-card.animate-in::after {
+      animation: card-glow 0.6s ease-out 0.2s both;
+    }
+
+    /* Left border entrance animation */
+    .workflow-card.animate-in::before {
+      animation: left-border-entrance 0.8s ease-out 0.3s both;
+    }
+
+    /* Prevent animation glitches during scroll */
+    .workflow-card {
+      transform: translateZ(0); /* Force hardware acceleration */
+      perspective: 1000px;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Optimize animations for performance */
+    .workflow-card.animate-in {
+      transform: translateY(0) scale(1) translateZ(0);
+    }
+
+    /* Staggered animation delays for cards */
+    .workflow-card:nth-child(1) { transition-delay: 0ms; }
+    .workflow-card:nth-child(2) { transition-delay: 80ms; }
+    .workflow-card:nth-child(3) { transition-delay: 160ms; }
+    .workflow-card:nth-child(4) { transition-delay: 240ms; }
+    .workflow-card:nth-child(5) { transition-delay: 320ms; }
+    .workflow-card:nth-child(6) { transition-delay: 400ms; }
+    .workflow-card:nth-child(7) { transition-delay: 480ms; }
+    .workflow-card:nth-child(8) { transition-delay: 560ms; }
+    .workflow-card:nth-child(9) { transition-delay: 640ms; }
+    .workflow-card:nth-child(10) { transition-delay: 720ms; }
+    .workflow-card:nth-child(11) { transition-delay: 800ms; }
+    .workflow-card:nth-child(12) { transition-delay: 880ms; }
+
+    /* Enhanced State Transitions */
+    .state {
+      transition: all 0.3s ease;
+    }
+
+    .state.hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+
+    .state.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-content">
+        <a href="https://lumenosis.com" target="_blank" rel="noopener" class="brand-link">
+          <div class="lumenosis-badge">
+            <span>⚡</span>
+            <span>Powered by Lumenosis</span>
+          </div>
+        </a>
+        <h1 class="title clickable-title" id="heroTitle" onclick="resetToHome()">All n8n Workflow<br>Automation Templates</h1>
+        <p class="subtitle">Browse, search and filter a comprehensive collection of production-ready N8N workflow Automation templates. Find automation solutions, documentation, and best practices for your business needs.</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-number" id="totalCount">0</span>
+            <span class="stat-label">Total</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="activeCount">0</span>
+            <span class="stat-label">Active</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="nodeCount">0</span>
+            <span class="stat-label">Total Nodes</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" id="integrationCount">0</span>
+            <span class="stat-label">Integrations</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Search Bar - Static initially, floating on scroll -->
+    <div class="hero-search" id="heroSearch">
+      <div class="hero-search-container">
+        <input type="text" id="heroSearchInput" class="hero-search-input"
+          placeholder="Search ANYTHING: titles, descriptions, integrations, node count, JSON content...">
+        <div class="hero-search-help">
+          <small>💡 Search examples: "Slack", "30 nodes", "OpenAI", "webhook", "CRM"</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="container">
+        <div class="filter-section">
+          <div class="filter-group">
+            <label for="triggerFilter">Trigger:</label>
+            <select id="triggerFilter">
+              <option value="all">All Types</option>
+              <option value="Webhook">Webhook</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Manual">Manual</option>
+              <option value="Complex">Complex</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="complexityFilter">Complexity:</label>
+            <select id="complexityFilter">
+              <option value="all">All Levels</option>
+              <option value="low">Low (≤5 nodes)</option>
+              <option value="medium">Medium (6-15 nodes)</option>
+              <option value="high">High (16+ nodes)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter">
+              <option value="all">All Categories</option>
+              <!-- Categories will be populated dynamically -->
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>
+              <input type="checkbox" id="activeOnly">
+              Active only
+            </label>
+          </div>
+
+
+
+          <button id="themeToggle" class="theme-toggle">🌙</button>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- Quick Category Navigation - Below hero, scroll-triggered -->
+    <div class="quick-categories" id="quickCategories">
+      <div class="quick-categories-title">Quick Category Navigation</div>
+      <div class="category-buttons" id="categoryButtons">
+        <!-- Category buttons will be populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container">
+
+
+        <!-- Error State -->
+        <div id="errorState" class="state error hidden">
+          <div class="icon">❌</div>
+          <h3>Error Loading Workflows</h3>
+          <p id="errorMessage">Something went wrong. Please try again.</p>
+          <button id="retryBtn" class="retry-btn">Retry</button>
+        </div>
+
+        <!-- No Results State -->
+        <div id="noResultsState" class="state hidden">
+          <div class="icon">🔍</div>
+          <h3>No workflows found</h3>
+          <p>Try adjusting your search terms or filters</p>
+        </div>
+
+        <!-- Workflows Grid -->
+        <div id="workflowGrid" class="workflow-grid hidden">
+          <!-- Compact inline loading spinner -->
+          <div id="inlineLoader" class="inline-loader hidden">
+            <div class="spinner"></div>
+            <span class="loading-text">Loading workflows...</span>
+          </div>
+          <!-- Workflow cards will be inserted here -->
+        </div>
+
+        <!-- Load More -->
+        <div id="loadMoreContainer" class="load-more-container hidden">
+          <button id="loadMoreBtn" class="load-more-btn">Load More</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Workflow Detail Modal -->
+    <div id="workflowModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modalTitle">Workflow Details</h2>
+          <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="workflow-detail">
+            <h4>Description</h4>
+            <p id="modalDescription">Loading...</p>
+          </div>
+
+          <div class="workflow-detail">
+            <h4>Statistics</h4>
+            <div id="modalStats">Loading...</div>
+          </div>
+
+          <div class="workflow-detail">
+            <h4>Integrations</h4>
+            <div id="modalIntegrations">Loading...</div>
+          </div>
+
+          <div class="workflow-detail">
+            <h4>Actions</h4>
+            <div class="workflow-actions">
+              <a id="downloadBtn" class="action-btn primary" href="#" download>📥 Download JSON</a>
+              <button id="viewJsonBtn" class="action-btn">📄 View JSON</button>
+              <button id="viewDiagramBtn" class="action-btn">📊 View Diagram</button>
+            </div>
+          </div>
+
+          <div class="workflow-detail hidden" id="jsonSection">
+            <div class="section-header">
+              <h4>Workflow JSON</h4>
+              <button id="copyJsonBtn" class="copy-btn" title="Copy JSON to clipboard">
+                📋 Copy
+              </button>
+            </div>
+            <div class="json-viewer" id="jsonViewer">Loading...</div>
+          </div>
+
+          <div class="workflow-detail hidden" id="diagramSection">
+            <div class="section-header">
+              <h4>Workflow Diagram</h4>
+              <button id="copyDiagramBtn" class="copy-btn" title="Copy diagram code to clipboard">
+                📋 Copy
+              </button>
+            </div>
+            <div id="diagramViewer">Loading diagram...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <a href="https://lumenosis.com" target="_blank" rel="noopener" class="footer-brand">
+            <span>⚡</span>
+            <span>Visit Lumenosis.com</span>
+          </a>
+          <p class="footer-description">
+            Professional automation solutions and workflow consulting. We help businesses streamline operations with custom n8n implementations and enterprise automation strategies.
+          </p>
+          <div class="footer-links">
+            <a href="https://lumenosis.com" target="_blank" rel="noopener" class="footer-link">Lumenosis.com</a>
+            <a href="https://lumenosis.com" target="_blank" rel="noopener" class="footer-link">About</a>
+            <a href="https://linkedin.com/in/martn-ai" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+          </div>
+          <div class="footer-copyright">
+            © 2025 Lumenosis. This collection is automatically synchronized with the latest n8n community workflows. Visit the original <a href="https://github.com/Zie619/n8n-workflows" target="_blank" rel="noopener" style="color: var(--primary);">source repository</a> for contributions.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Global function to reset to home state (called from HTML onclick)
+    let workflowAppInstance = null;
+    
+    function resetToHome() {
+      if (workflowAppInstance) {
+        workflowAppInstance.resetToHome();
+      }
+    }
+
+    // Enhanced Workflow App with Full Functionality
+    class WorkflowApp {
+      constructor() {
+        this.state = {
+          workflows: [],
+          currentPage: 1,
+          totalPages: 1,
+          totalCount: 0,
+          perPage: 20,
+          isLoading: false,
+          searchQuery: '',
+          selectedCategory: 'all', // Track selected category for persistence
+          filters: {
+            trigger: 'all',
+            complexity: 'all',
+            category: 'all',
+            activeOnly: false
+          },
+          categories: [],
+          categoryMap: new Map(),
+          allWorkflows: [], // Store all workflows for client-side filtering
+          enhancedWorkflows: [], // Store enhanced workflows with content for search
+          enhancedStats: null // Store enhanced stats
+        };
+
+        this.elements = {
+          heroSearchInput: document.getElementById('heroSearchInput'),
+          heroSearch: document.getElementById('heroSearch'),
+          triggerFilter: document.getElementById('triggerFilter'),
+          complexityFilter: document.getElementById('complexityFilter'),
+          categoryFilter: document.getElementById('categoryFilter'),
+          activeOnlyFilter: document.getElementById('activeOnly'),
+          themeSelector: document.getElementById('themeSelector'),
+          themeToggle: document.getElementById('themeToggle'),
+          quickCategories: document.getElementById('quickCategories'),
+          categoryButtons: document.getElementById('categoryButtons'),
+
+          workflowGrid: document.getElementById('workflowGrid'),
+          loadMoreContainer: document.getElementById('loadMoreContainer'),
+          loadMoreBtn: document.getElementById('loadMoreBtn'),
+          inlineLoader: document.getElementById('inlineLoader'),
+          errorState: document.getElementById('errorState'),
+          noResultsState: document.getElementById('noResultsState'),
+          errorMessage: document.getElementById('errorMessage'),
+          retryBtn: document.getElementById('retryBtn'),
+          totalCount: document.getElementById('totalCount'),
+          activeCount: document.getElementById('activeCount'),
+          nodeCount: document.getElementById('nodeCount'),
+          integrationCount: document.getElementById('integrationCount'),
+          // Modal elements
+          workflowModal: document.getElementById('workflowModal'),
+          modalTitle: document.getElementById('modalTitle'),
+          modalClose: document.getElementById('modalClose'),
+          modalDescription: document.getElementById('modalDescription'),
+          modalStats: document.getElementById('modalStats'),
+          modalIntegrations: document.getElementById('modalIntegrations'),
+          downloadBtn: document.getElementById('downloadBtn'),
+          viewJsonBtn: document.getElementById('viewJsonBtn'),
+          viewDiagramBtn: document.getElementById('viewDiagramBtn'),
+          jsonSection: document.getElementById('jsonSection'),
+          jsonViewer: document.getElementById('jsonViewer'),
+          diagramSection: document.getElementById('diagramSection'),
+          diagramViewer: document.getElementById('diagramViewer'),
+          copyJsonBtn: document.getElementById('copyJsonBtn'),
+          copyDiagramBtn: document.getElementById('copyDiagramBtn')
+        };
+
+        this.searchDebounceTimer = null;
+        this.currentWorkflow = null;
+        this.currentJsonData = null;
+        this.currentDiagramData = null;
+        this.init();
+      }
+
+      async init() {
+        // Prevent scrolling during initial load
+        document.body.classList.add('page-loading');
+        
+        this.setupEventListeners();
+        this.setupTheme();
+        this.setupScrollAnimations();
+        this.initMermaid();
+        this.handleURLParams(); // Handle URL parameters for category persistence
+        
+        // Load enhanced workflow data for client-side search
+        await this.loadEnhancedWorkflowData();
+        
+        await this.loadInitialData();
+        
+        // Re-enable scrolling after content is loaded
+        document.body.classList.remove('page-loading');
+        document.body.classList.add('content-ready');
+      }
+
+      // Handle URL parameters for persistence
+      handleURLParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Handle category parameter
+        const category = urlParams.get('category');
+        if (category && category !== 'all') {
+          this.state.selectedCategory = category;
+          this.state.filters.category = category;
+          
+          // Update UI to reflect selected category
+          if (this.elements.categoryFilter) {
+            this.elements.categoryFilter.value = category;
+          }
+        }
+        
+        // Handle search query parameter
+        const searchQuery = urlParams.get('q');
+        if (searchQuery) {
+          this.state.searchQuery = searchQuery;
+          if (this.elements.heroSearchInput) {
+            this.elements.heroSearchInput.value = searchQuery;
+          }
+        }
+        
+        // Handle other filter parameters
+        const trigger = urlParams.get('trigger');
+        if (trigger && trigger !== 'all') {
+          this.state.filters.trigger = trigger;
+          if (this.elements.triggerFilter) {
+            this.elements.triggerFilter.value = trigger;
+          }
+        }
+        
+        const complexity = urlParams.get('complexity');
+        if (complexity && complexity !== 'all') {
+          this.state.filters.complexity = complexity;
+          if (this.elements.complexityFilter) {
+            this.elements.complexityFilter.value = complexity;
+          }
+        }
+        
+        const activeOnly = urlParams.get('active_only');
+        if (activeOnly === 'true') {
+          this.state.filters.activeOnly = true;
+          if (this.elements.activeOnlyFilter) {
+            this.elements.activeOnlyFilter.checked = true;
+          }
+        }
+      }
+
+      async loadEnhancedWorkflowData() {
+        try {
+          console.log('Loading enhanced workflow data for client-side search...');
+          
+          // Try to load from vercel_workflows.json (enhanced data with content)
+          const response = await fetch('/vercel_workflows.json');
+          if (response.ok) {
+            const enhancedData = await response.json();
+            console.log(`Loaded enhanced data: ${enhancedData.workflows.length} workflows with content`);
+            
+            // Store enhanced workflows for client-side search
+            this.state.enhancedWorkflows = enhancedData.workflows;
+            this.state.enhancedStats = enhancedData.stats;
+            
+            // Update stats display
+            this.updateStatsDisplay(enhancedData.stats);
+            
+            console.log('Enhanced workflow data loaded successfully');
+            return true;
+          } else {
+            console.log('Enhanced data not available, falling back to API');
+            return false;
+          }
+        } catch (error) {
+          console.log('Error loading enhanced data:', error);
+          return false;
+        }
+      }
+
+      // Client-side search through enhanced workflow data
+      searchEnhancedWorkflows(query) {
+        if (!this.state.enhancedWorkflows || this.state.enhancedWorkflows.length === 0) {
+          console.log('No enhanced workflow data available for search');
+          return [];
+        }
+
+        if (!query || query.trim() === '') {
+          return this.state.enhancedWorkflows;
+        }
+
+        const searchTerms = query.toLowerCase().trim().split(/\s+/);
+        console.log(`Searching for terms: ${searchTerms.join(', ')}`);
+
+        const results = this.state.enhancedWorkflows.filter(workflow => {
+          // Search through all relevant fields
+          const searchableText = [
+            workflow.name || '',
+            workflow.description || '',
+            workflow.filename || '',
+            workflow.trigger_type || '',
+            workflow.complexity || '',
+            workflow.integrations?.join(' ') || '',
+            workflow.tags?.join(' ') || '',
+            workflow.content || '' // This is the key - search through actual workflow content
+          ].join(' ').toLowerCase();
+
+          // Check if ALL search terms are found in the searchable text
+          return searchTerms.every(term => searchableText.includes(term));
+        });
+
+        console.log(`Found ${results.length} workflows matching "${query}"`);
+        return results;
+      }
+
+      initMermaid() {
+        // Initialize Mermaid with theme-adaptive configuration
+        if (typeof mermaid !== 'undefined') {
+          // Detect current theme
+          const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+          
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: isDarkTheme ? 'dark' : 'default',
+            themeVariables: isDarkTheme ? {
+              // Dark theme colors for better visibility
+              primaryColor: '#60a5fa',
+              primaryTextColor: '#f9fafb',
+              primaryBorderColor: '#3b82f6',
+              lineColor: '#9ca3af',
+              secondaryColor: '#374151',
+              tertiaryColor: '#1f2937',
+              background: '#1f2937',
+              nodeTextColor: '#f9fafb',
+              nodeBkgColor: '#374151',
+              nodeBorderColor: '#4b5563',
+              clusterBkgColor: '#111827',
+              clusterBorderColor: '#374151',
+              defaultLinkColor: '#60a5fa'
+            } : {
+              // Light theme colors
+              primaryColor: '#3b82f6',
+              primaryTextColor: '#1e293b',
+              primaryBorderColor: '#2563eb',
+              lineColor: '#64748b',
+              secondaryColor: '#f1f5f9',
+              tertiaryColor: '#f8fafc',
+              background: '#ffffff',
+              nodeTextColor: '#1e293b',
+              nodeBkgColor: '#f1f5f9',
+              nodeBorderColor: '#e2e8f0',
+              clusterBkgColor: '#f8fafc',
+              clusterBorderColor: '#cbd5e1',
+              defaultLinkColor: '#64748b'
+            }
+          });
+        }
+      }
+
+      setupEventListeners() {
+        // Search and filters
+        this.elements.heroSearchInput.addEventListener('input', (e) => {
+          this.state.searchQuery = e.target.value;
+          this.debounceSearch();
+        });
+
+        this.elements.triggerFilter.addEventListener('change', (e) => {
+          this.state.filters.trigger = e.target.value;
+          this.state.currentPage = 1;
+          this.applyFiltersWithinCategory();
+        });
+
+        this.elements.complexityFilter.addEventListener('change', (e) => {
+          this.state.filters.complexity = e.target.value;
+          this.state.currentPage = 1;
+          this.applyFiltersWithinCategory();
+        });
+
+        this.elements.categoryFilter.addEventListener('change', (e) => {
+          const selectedCategory = e.target.value;
+          console.log(`Category filter changed to: ${selectedCategory}`);
+          console.log('Current category map size:', this.state.categoryMap.size);
+          
+          this.state.filters.category = selectedCategory;
+          this.state.currentPage = 1;
+          this.applyFiltersWithinCategory();
+        });
+
+        this.elements.activeOnlyFilter.addEventListener('change', (e) => {
+          this.state.filters.activeOnly = e.target.checked;
+          this.state.currentPage = 1;
+          this.applyFiltersWithinCategory();
+        });
+
+        // Load more
+        this.elements.loadMoreBtn.addEventListener('click', () => {
+          this.loadMoreWorkflows();
+        });
+
+        // Retry
+        this.elements.retryBtn.addEventListener('click', () => {
+          this.loadInitialData();
+        });
+
+        // Theme toggle
+        this.elements.themeToggle.addEventListener('click', () => {
+          this.toggleTheme();
+        });
+        
+        // Theme selector dropdown
+        if (this.elements.themeSelector) {
+          this.elements.themeSelector.addEventListener('change', (e) => {
+            this.setTheme(e.target.value);
+          });
+        }
+
+        // Modal events
+        this.elements.modalClose.addEventListener('click', () => {
+          this.closeModal();
+        });
+
+        this.elements.workflowModal.addEventListener('click', (e) => {
+          if (e.target === this.elements.workflowModal) {
+            this.closeModal();
+          }
+        });
+
+        this.elements.viewJsonBtn.addEventListener('click', () => {
+          this.toggleJsonView();
+        });
+
+        this.elements.viewDiagramBtn.addEventListener('click', () => {
+          this.toggleDiagramView();
+        });
+
+        // Copy button events
+        this.elements.copyJsonBtn.addEventListener('click', () => {
+          this.copyToClipboard(this.currentJsonData, 'copyJsonBtn');
+        });
+
+        this.elements.copyDiagramBtn.addEventListener('click', () => {
+          this.copyToClipboard(this.currentDiagramData, 'copyDiagramBtn');
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.closeModal();
+          }
+        });
+
+        // Floating search scroll behavior
+        this.setupFloatingSearch();
+      }
+
+      setupFloatingSearch() {
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const updateHeroSearch = () => {
+          const currentScrollY = window.scrollY;
+          const heroHeight = 180; // Further reduced for compact layout
+          
+          // Make search bar floating only after scrolling past hero
+          if (currentScrollY > heroHeight) {
+            this.elements.heroSearch.classList.add('floating');
+          } else {
+            this.elements.heroSearch.classList.remove('floating');
+          }
+
+          // Show quick categories immediately below hero (no scroll delay)
+          if (currentScrollY > heroHeight - 50) {
+            this.elements.quickCategories.classList.add('visible');
+          } else {
+            this.elements.quickCategories.classList.remove('visible');
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        };
+
+        const requestTick = () => {
+          if (!ticking) {
+            requestAnimationFrame(updateHeroSearch);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+      }
+
+      setupScrollAnimations() {
+        // Use IntersectionObserver for performance-optimized scroll animations
+        if ('IntersectionObserver' in window) {
+          const observerOptions = {
+            threshold: 0.15, // Trigger when 15% of card is visible for smoother entry
+            rootMargin: '100px 0px', // Start animation 100px before card enters viewport
+          };
+
+          const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              const card = entry.target;
+              
+              if (entry.isIntersecting) {
+                // Only animate if not already animated
+                if (!card.classList.contains('animate-in')) {
+                  card.classList.add('animate-in');
+                  // Mark as animated to prevent re-triggering
+                  card.setAttribute('data-animated', 'true');
+                }
+              }
+              // Don't remove animate-in class - keep cards visible once animated
+            });
+          }, observerOptions);
+
+          // Observe all workflow cards
+          const observeCards = () => {
+            const cards = document.querySelectorAll('.workflow-card');
+            cards.forEach(card => {
+              // Reset animation state for new cards
+              card.classList.remove('animate-in');
+              card.removeAttribute('data-animated');
+              cardObserver.observe(card);
+            });
+          };
+
+          // Initial observation
+          observeCards();
+
+          // Store observer for cleanup
+          this.cardObserver = cardObserver;
+          
+          // Store observeCards function for reuse
+          this.observeCards = observeCards;
+        } else {
+          // Fallback for older browsers - simple scroll-based animation
+          this.setupFallbackScrollAnimations();
+        }
+      }
+
+      refreshScrollAnimations() {
+        // Refresh scroll animations for new content
+        if (this.cardObserver && this.observeCards) {
+          this.observeCards();
+        }
+      }
+
+      setupFallbackScrollAnimations() {
+        let ticking = false;
+        
+        const updateCardAnimations = () => {
+          const cards = document.querySelectorAll('.workflow-card');
+          const viewportHeight = window.innerHeight;
+          
+          cards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            const isVisible = rect.top < viewportHeight * 0.8 && rect.bottom > 0;
+            
+            if (isVisible && !card.classList.contains('animate-in')) {
+              card.classList.add('animate-in');
+              card.setAttribute('data-animated', 'true');
+            }
+            // Don't remove animate-in class - keep cards visible once animated
+          });
+          
+          ticking = false;
+        };
+
+        const requestTick = () => {
+          if (!ticking) {
+            requestAnimationFrame(updateCardAnimations);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+      }
+
+      setupTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        this.updateThemeToggle(savedTheme);
+        
+        // Update theme selector dropdown to match current theme
+        if (this.elements.themeSelector) {
+          this.elements.themeSelector.value = savedTheme;
+        }
+      }
+
+      toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        this.updateThemeToggle(newTheme);
+        
+        // Reinitialize Mermaid with new theme for better diagram visibility
+        this.initMermaid();
+      }
+      
+      setTheme(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+        localStorage.setItem('theme', themeName);
+        this.updateThemeToggle(themeName);
+        
+        // Update theme selector dropdown
+        if (this.elements.themeSelector) {
+          this.elements.themeSelector.value = themeName;
+        }
+        
+        // Reinitialize Mermaid with new theme
+        this.initMermaid();
+      }
+
+      updateThemeToggle(theme) {
+        this.elements.themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      }
+
+      debounceSearch() {
+        clearTimeout(this.searchDebounceTimer);
+        this.searchDebounceTimer = setTimeout(() => {
+          this.state.currentPage = 1;
+          
+          // Use enhanced client-side search if available, otherwise fall back to API search
+          if (this.state.enhancedWorkflows && this.state.enhancedWorkflows.length > 0) {
+            console.log('Using enhanced client-side search');
+            this.performEnhancedSearch();
+          } else {
+            console.log('Enhanced data not available, using API search');
+            this.searchWithinCategory();
+          }
+        }, 300);
+      }
+
+      // Enhanced client-side search function
+      performEnhancedSearch() {
+        try {
+          console.log(`Performing enhanced search for: "${this.state.searchQuery}"`);
+          
+          // Show inline loader
+          this.elements.inlineLoader.classList.remove('hidden');
+          
+          // Perform the search
+          const searchResults = this.searchEnhancedWorkflows(this.state.searchQuery);
+          
+          // Apply additional filters
+          let filteredResults = searchResults;
+          
+          // Filter by trigger type
+          if (this.state.filters.trigger !== 'all') {
+            filteredResults = filteredResults.filter(w => w.trigger_type === this.state.filters.trigger);
+          }
+          
+          // Filter by complexity
+          if (this.state.filters.complexity !== 'all') {
+            filteredResults = filteredResults.filter(w => w.complexity === this.state.filters.complexity);
+          }
+          
+          // Filter by active only
+          if (this.state.filters.activeOnly) {
+            filteredResults = filteredResults.filter(w => w.active);
+          }
+          
+          // Filter by category if selected
+          if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+            filteredResults = filteredResults.filter(w => {
+              // Use category field directly from enhanced data
+              const workflowCategory = w.category || this.getWorkflowCategory(w.filename);
+              return workflowCategory === this.state.selectedCategory;
+            });
+          }
+          
+          console.log(`Enhanced search found ${filteredResults.length} workflows after filtering`);
+          
+          // Update state and render results
+          this.state.workflows = filteredResults;
+          this.state.totalCount = filteredResults.length;
+          this.state.currentPage = 1;
+          
+          // Render the results
+          this.renderWorkflows(filteredResults);
+          
+          // Update load more button
+          this.updateLoadMoreButton();
+          
+          // Show appropriate state
+          if (filteredResults.length === 0) {
+            this.showState('no-results');
+          } else {
+            this.showState('content');
+          }
+          
+        } catch (error) {
+          console.error('Error in enhanced search:', error);
+          this.showError('Search failed: ' + error.message);
+        } finally {
+          // Hide inline loader
+          this.elements.inlineLoader.classList.add('hidden');
+        }
+      }
+
+      async searchWithinCategory() {
+        // If a category is selected, search within that category
+        if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+          console.log(`Searching within category: ${this.state.selectedCategory}`);
+          await this.searchWorkflowsInCategory(this.state.selectedCategory);
+        } else {
+          // Normal search across all workflows
+          console.log('Searching across all workflows');
+          this.resetAndSearch();
+        }
+      }
+
+      async searchWorkflowsInCategory(category) {
+        try {
+          // Show inline loader
+          this.elements.inlineLoader.classList.remove('hidden');
+          
+          // Search workflows within the selected category
+          const params = new URLSearchParams({
+            q: this.state.searchQuery,
+            trigger: this.state.filters.trigger,
+            complexity: this.state.filters.complexity,
+            active_only: this.state.filters.activeOnly,
+            page: 1,
+            per_page: 100 // Load more results for better filtering
+          });
+
+          const response = await this.apiCall(`/workflows?${params}`);
+          
+          if (response.workflows && response.workflows.length > 0) {
+            // Filter workflows by category
+            const categoryWorkflows = response.workflows.filter(workflow => {
+              const workflowCategory = this.getWorkflowCategory(workflow.filename);
+              return workflowCategory === category;
+            });
+            
+            // Update state
+            this.state.workflows = categoryWorkflows;
+            this.state.currentPage = 1;
+            
+            // Render results
+            this.renderWorkflows(categoryWorkflows);
+  
+            
+            console.log(`Search found ${categoryWorkflows.length} workflows in category: ${category}`);
+          } else {
+            // No results found
+            this.state.workflows = [];
+            this.renderWorkflows([]);
+  
+            console.log('No search results found in category');
+          }
+        } catch (error) {
+          console.error('Error searching within category:', error);
+          this.showError('Search failed: ' + error.message);
+        } finally {
+          // Hide inline loader
+          this.elements.inlineLoader.classList.add('hidden');
+        }
+      }
+
+      async apiCall(endpoint, options = {}) {
+        // Use relative URLs for production, fallback to localhost for development
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const apiBaseUrl = isLocalhost ? 'http://127.0.0.1:8001' : '';
+        const response = await fetch(`${apiBaseUrl}/api${endpoint}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            ...options.headers
+          },
+          ...options
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        return response.json();
+      }
+
+      async loadInitialData() {
+        // Show loading state immediately
+        this.showState('loading');
+
+        try {
+          // Load categories first, then stats and workflows
+          console.log('Loading categories...');
+          await this.loadCategories();
+          
+          console.log('Categories loaded, populating filter...');
+          this.populateCategoryFilter();
+          
+          // Load stats and workflows in parallel
+          console.log('Loading stats and workflows...');
+          const [stats] = await Promise.all([
+            this.apiCall('/stats'),
+            this.loadWorkflows(true)
+          ]);
+          
+          // Ensure we have enough workflows for filtering by loading more if needed
+          if (this.state.allWorkflows && this.state.allWorkflows.length < 100) {
+            console.log('Loading additional workflows for better filtering...');
+            await this.loadMoreWorkflowsForFiltering();
+          }
+
+          this.updateStatsDisplay(stats);
+          console.log('Initial data loading complete');
+          
+          // Re-populate categories with valid ones after workflows are loaded
+          this.populateCategoryFilter();
+          
+          // Apply selected category filter if any
+          if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+            console.log(`Applying initial category filter for: ${this.state.selectedCategory}`);
+            
+            // Check if the selected category is still valid
+            const validCategories = this.getValidCategoriesWithWorkflows();
+            if (!validCategories.includes(this.state.selectedCategory)) {
+              console.warn(`Previously selected category "${this.state.selectedCategory}" is no longer valid, resetting to "all"`);
+              this.state.selectedCategory = 'all';
+              this.state.filters.category = 'all';
+              // Re-populate categories to reflect current state
+              this.populateCategoryFilter();
+            } else {
+              const filteredWorkflows = this.filterWorkflowsByCategory(this.state.selectedCategory);
+              console.log(`Initial filtering found ${filteredWorkflows.length} workflows for category: ${this.state.selectedCategory}`);
+              this.renderWorkflows(filteredWorkflows);
+            }
+          } else {
+            // Show all workflows count
+            console.log(`No category filter, showing all ${this.state.allWorkflows?.length || 0} workflows`);
+          }
+          
+          // Show content with smooth transition
+          this.showState('content');
+        } catch (error) {
+          console.error('Error during initial data loading:', error);
+          this.showError('Failed to load data: ' + error.message);
+        }
+      }
+
+      async loadCategories() {
+        try {
+          console.log('Loading categories from API...');
+          
+          // Load categories and mappings in parallel from API
+          const [categoriesResponse, mappingsResponse] = await Promise.all([
+            this.apiCall('/categories'),
+            this.apiCall('/category-mappings')
+          ]);
+          
+          // Set categories from API
+          this.state.categories = categoriesResponse.categories || ['Uncategorized'];
+          
+          // Build category map from API mappings
+          const categoryMap = new Map();
+          const mappings = mappingsResponse.mappings || {};
+          
+          Object.entries(mappings).forEach(([filename, category]) => {
+            categoryMap.set(filename, category || 'Uncategorized');
+          });
+          
+          this.state.categoryMap = categoryMap;
+          
+          console.log(`Successfully loaded ${this.state.categories.length} categories from API:`, this.state.categories);
+          console.log(`Loaded ${categoryMap.size} category mappings from API`);
+          
+          // Debug: Show some sample mappings
+          const sampleMappings = Array.from(categoryMap.entries()).slice(0, 5);
+          console.log('Sample category mappings:', sampleMappings);
+          
+          return { categories: this.state.categories, mappings: mappings };
+        } catch (error) {
+          console.error('Failed to load categories from API:', error);
+          // Set default categories if loading fails
+          this.state.categories = ['Uncategorized'];
+          this.state.categoryMap = new Map();
+          return { categories: this.state.categories, mappings: {} };
+        }
+      }
+
+      populateCategoryFilter() {
+        const select = this.elements.categoryFilter;
+        
+        if (!select) {
+          console.error('Category filter element not found');
+          return;
+        }
+        
+        // Get only categories that have actual workflows
+        const validCategories = this.getValidCategoriesWithWorkflows();
+        console.log('Populating category filter with valid categories:', validCategories);
+        
+        // Clear existing options except "All Categories"
+        while (select.children.length > 1) {
+          select.removeChild(select.lastChild);
+        }
+        
+        if (validCategories.length === 0) {
+          console.warn('No valid categories available to populate filter');
+          return;
+        }
+        
+        // Add valid categories in alphabetical order
+        validCategories.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category;
+          option.textContent = category;
+          select.appendChild(option);
+          console.log(`Added category option: ${category}`);
+        });
+        
+        console.log(`Category filter populated with ${select.options.length - 1} valid categories`);
+        
+        // Also populate quick category buttons
+        this.populateQuickCategories();
+      }
+
+      populateQuickCategories() {
+        const container = this.elements.categoryButtons;
+        if (!container) return;
+        
+        // Clear existing buttons
+        container.innerHTML = '';
+        
+        // Add "All" button
+        const allButton = document.createElement('button');
+        allButton.className = 'category-btn';
+        allButton.textContent = 'All Templates';
+        allButton.addEventListener('click', () => this.selectQuickCategory('all', allButton));
+        container.appendChild(allButton);
+        
+        // Set active state based on selected category
+        if (this.state.selectedCategory === 'all') {
+          allButton.classList.add('active');
+        }
+        
+        // Get only categories that have actual workflows
+        const validCategories = this.getValidCategoriesWithWorkflows();
+        console.log(`Found ${validCategories.length} valid categories with workflows out of ${this.state.categories.length} total categories`);
+        
+        // Add category buttons for valid categories only
+        validCategories.forEach(category => {
+          const button = document.createElement('button');
+          button.className = 'category-btn';
+          button.textContent = category;
+          button.addEventListener('click', () => this.selectQuickCategory(category, button));
+          
+          // Set active state based on selected category
+          if (this.state.selectedCategory === category) {
+            button.classList.add('active');
+          }
+          
+          container.appendChild(button);
+        });
+      }
+
+      getValidCategoriesWithWorkflows() {
+        if (!this.state.allWorkflows || this.state.allWorkflows.length === 0) {
+          console.log('No workflows available yet, returning all categories');
+          return this.state.categories;
+        }
+        
+        // Count workflows per category
+        const categoryCounts = new Map();
+        this.state.allWorkflows.forEach(workflow => {
+          const category = this.getWorkflowCategory(workflow.filename);
+          categoryCounts.set(category, (categoryCounts.get(category) || 0) + 1);
+        });
+        
+        // Filter categories to only those with workflows
+        const validCategories = this.state.categories.filter(category => {
+          const count = categoryCounts.get(category) || 0;
+          const isValid = count > 0;
+          
+          if (!isValid) {
+            console.log(`Removing empty category: ${category} (0 workflows)`);
+          } else {
+            console.log(`Keeping category: ${category} (${count} workflows)`);
+          }
+          
+          return isValid;
+        });
+        
+        // Sort by workflow count (highest first) for better UX
+        validCategories.sort((a, b) => {
+          const countA = categoryCounts.get(a) || 0;
+          const countB = categoryCounts.get(b) || 0;
+          return countB - countA;
+        });
+        
+        console.log('Category workflow counts:', Object.fromEntries(categoryCounts));
+        console.log('Valid categories (sorted by workflow count):', validCategories);
+        
+        return validCategories;
+      }
+
+      setupQuickCategoryListeners() {
+        // This method ensures category buttons are properly set up after DOM is ready
+        // The actual event listeners are set in populateQuickCategories()
+        if (this.elements.categoryButtons) {
+          // Re-populate if needed (e.g., after theme changes)
+          this.populateQuickCategories();
+        }
+      }
+
+      selectQuickCategory(category, buttonElement) {
+        console.log(`Quick category selected: ${category}`);
+        
+        // Update category filter
+        this.elements.categoryFilter.value = category;
+        this.state.filters.category = category;
+        this.state.currentPage = 1;
+        
+        // Update button states
+        this.elements.categoryButtons.querySelectorAll('.category-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        buttonElement.classList.add('active');
+        
+        // Store selected category in state for persistence
+        this.state.selectedCategory = category;
+        
+        // Apply client-side filtering immediately
+        if (category === 'all') {
+          // Reset to home state - show all workflows
+          console.log(`Resetting to home state - showing all ${this.state.allWorkflows?.length || 0} workflows`);
+          
+          // Reset pagination state
+          this.state.currentPage = 1;
+          this.state.workflows = this.state.allWorkflows || [];
+          
+          // Render all workflows
+          this.renderWorkflows(this.state.workflows);
+          
+          // Reset filters to default state
+          this.resetFiltersToDefault();
+        } else {
+          // Filter workflows by category
+          const filteredWorkflows = this.filterWorkflowsByCategory(category);
+          console.log(`Filtered to ${filteredWorkflows.length} workflows for category: ${category}`);
+          
+          // Check if the category actually has workflows
+          if (filteredWorkflows.length === 0) {
+            console.warn(`Category "${category}" has no workflows - this shouldn't happen with valid categories`);
+            // Show a message to the user
+            this.showNoResultsForCategory(category);
+            return;
+          }
+          
+          // Reset pagination for category view
+          this.state.currentPage = 1;
+          this.state.workflows = filteredWorkflows;
+          
+          this.renderWorkflows(this.state.workflows);
+        }
+        
+        // Update URL without page reload
+        this.updateURL();
+      }
+
+      showNoResultsForCategory(category) {
+        // Show a user-friendly message when a category has no results
+        const container = this.elements.workflowGrid;
+        if (container) {
+          container.innerHTML = `
+            <div class="no-results-message">
+              <div class="icon">🔍</div>
+              <h3>No workflows found in "${category}"</h3>
+              <p>This category appears to be empty. Please try selecting a different category or return to "All Templates".</p>
+              <button class="back-to-all-btn" onclick="this.closest('.workflow-app').selectQuickCategory('all', document.querySelector('.category-btn'))">
+                ← Back to All Templates
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      async applyFiltersWithinCategory() {
+        // If a category is selected, apply filters within that category
+        if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+          console.log(`Applying filters within category: ${this.state.selectedCategory}`);
+          await this.searchWorkflowsInCategory(this.state.selectedCategory);
+        } else {
+          // Apply filters across all workflows
+          console.log('Applying filters across all workflows');
+          this.resetAndSearch();
+        }
+      }
+
+      resetFiltersToDefault() {
+        // Reset all filters to default values
+        this.state.filters = {
+          trigger: 'all',
+          complexity: 'all',
+          category: 'all',
+          activeOnly: false
+        };
+        
+        // Reset filter UI elements
+        if (this.elements.triggerFilter) this.elements.triggerFilter.value = 'all';
+        if (this.elements.complexityFilter) this.elements.complexityFilter.value = 'all';
+        if (this.elements.categoryFilter) this.elements.categoryFilter.value = 'all';
+        if (this.elements.activeOnlyFilter) this.elements.activeOnlyFilter.checked = false;
+        
+        // Clear search query
+        this.state.searchQuery = '';
+        if (this.elements.heroSearchInput) this.elements.heroSearchInput.value = '';
+        
+        console.log('Filters reset to default state');
+      }
+
+      resetToHome() {
+        // Reset to home state - show all templates
+        console.log('Resetting to home state');
+        
+        // Reset category selection
+        this.state.selectedCategory = 'all';
+        this.state.filters.category = 'all';
+        
+        // Reset all filters
+        this.resetFiltersToDefault();
+        
+        // Clear any selected category in quick navigation
+        if (this.elements.quickCategories) {
+          const activeButton = this.elements.quickCategories.querySelector('.category-btn.active');
+          if (activeButton) {
+            activeButton.classList.remove('active');
+          }
+          
+          // Activate "All Templates" button
+          const allTemplatesBtn = this.elements.quickCategories.querySelector('[data-category="all"]');
+          if (allTemplatesBtn) {
+            allTemplatesBtn.classList.add('active');
+          }
+        }
+        
+        // Update category filter dropdown
+        if (this.elements.categoryFilter) {
+          this.elements.categoryFilter.value = 'all';
+        }
+        
+        // Load all workflows
+        this.loadWorkflows(true);
+        
+        // Update URL to remove parameters
+        this.updateURL();
+        
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        console.log('Reset to home state complete');
+      }
+
+      filterWorkflowsByCategory(category) {
+        if (!this.state.allWorkflows || this.state.allWorkflows.length === 0) {
+          console.log('No workflows available for filtering');
+          return [];
+        }
+        
+        console.log(`Filtering ${this.state.allWorkflows.length} workflows for category: ${category}`);
+        console.log('Available categories in workflows:', [...new Set(this.state.allWorkflows.map(w => this.getWorkflowCategory(w.filename)))]);
+        
+        const filteredWorkflows = this.state.allWorkflows.filter(workflow => {
+          const workflowCategory = this.getWorkflowCategory(workflow.filename);
+          const matches = workflowCategory === category;
+          
+          // Debug logging for first few workflows
+          if (this.state.allWorkflows.indexOf(workflow) < 3) {
+            console.log(`Workflow ${workflow.filename}: category=${workflowCategory}, matches=${matches}`);
+          }
+          
+          return matches;
+        });
+        
+        console.log(`Filtered ${this.state.allWorkflows.length} workflows to ${filteredWorkflows.length} for category: ${category}`);
+        return filteredWorkflows;
+      }
+
+
+
+      updateURL() {
+        const url = new URL(window.location);
+        
+        // Update category parameter
+        if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+          url.searchParams.set('category', this.state.selectedCategory);
+        } else {
+          url.searchParams.delete('category');
+        }
+        
+        // Update search query parameter
+        if (this.state.searchQuery) {
+          url.searchParams.set('q', this.state.searchQuery);
+        } else {
+          url.searchParams.delete('q');
+        }
+        
+        // Update filter parameters
+        if (this.state.filters.trigger !== 'all') {
+          url.searchParams.set('trigger', this.state.filters.trigger);
+        } else {
+          url.searchParams.delete('trigger');
+        }
+        
+        if (this.state.filters.complexity !== 'all') {
+          url.searchParams.set('complexity', this.state.filters.complexity);
+        } else {
+          url.searchParams.delete('complexity');
+        }
+        
+        if (this.state.filters.activeOnly) {
+          url.searchParams.set('active_only', 'true');
+        } else {
+          url.searchParams.delete('active_only');
+        }
+        
+        // Update URL without page reload
+        window.history.pushState({}, '', url);
+        console.log('URL updated:', url.toString());
+      }
+
+      async loadWorkflows(reset = false) {
+        if (reset) {
+          this.state.currentPage = 1;
+          this.state.workflows = [];
+        }
+
+        this.state.isLoading = true;
+        
+        // Show inline loader for workflow loading
+        if (reset) {
+          this.elements.inlineLoader.classList.remove('hidden');
+        }
+
+        try {
+          // Store all workflows for client-side filtering
+          if (reset && !this.state.allWorkflows) {
+            this.state.allWorkflows = [];
+          }
+          
+          // If category filtering is active, we need to load all workflows to filter properly
+          const needsAllWorkflows = this.state.filters.category !== 'all' && reset;
+          
+          let allWorkflows = [];
+          let totalCount = 0;
+          let totalPages = 1;
+          
+          if (needsAllWorkflows) {
+            // Load all workflows in batches for category filtering
+            console.log('Loading all workflows for category filtering...');
+            allWorkflows = await this.loadAllWorkflowsForCategoryFiltering();
+            
+            // Apply client-side category filtering
+            console.log(`Filtering ${allWorkflows.length} workflows for category: ${this.state.filters.category}`);
+            console.log('Category map size:', this.state.categoryMap.size);
+            
+            let matchCount = 0;
+            const filteredWorkflows = allWorkflows.filter(workflow => {
+              const workflowCategory = this.getWorkflowCategory(workflow.filename);
+              const matches = workflowCategory === this.state.filters.category;
+              
+              // Debug: log first few matches/non-matches
+              if (matchCount < 5 || (!matches && matchCount < 3)) {
+                console.log(`${workflow.filename}: ${workflowCategory} ${matches ? '===' : '!=='} ${this.state.filters.category}`);
+              }
+              
+              if (matches) matchCount++;
+              
+              return matches;
+            });
+            
+            console.log(`Filtered from ${allWorkflows.length} to ${filteredWorkflows.length} workflows`);
+            allWorkflows = filteredWorkflows;
+            totalCount = filteredWorkflows.length;
+            totalPages = 1; // All results loaded, no pagination needed
+          } else {
+            // Normal pagination
+            const params = new URLSearchParams({
+              q: this.state.searchQuery,
+              trigger: this.state.filters.trigger,
+              complexity: this.state.filters.complexity,
+              active_only: this.state.filters.activeOnly,
+              page: this.state.currentPage,
+              per_page: this.state.perPage
+            });
+
+            const response = await this.apiCall(`/workflows?${params}`);
+            allWorkflows = response.workflows;
+            totalCount = response.total;
+            totalPages = response.pages;
+          }
+
+          // Store all workflows for client-side filtering
+          if (reset) {
+            this.state.workflows = allWorkflows;
+            this.state.totalCount = totalCount;
+            this.state.totalPages = totalPages;
+            this.state.allWorkflows = allWorkflows; // Store for client-side filtering
+            console.log(`Stored ${allWorkflows.length} workflows in allWorkflows for client-side filtering`);
+          } else {
+            this.state.workflows.push(...allWorkflows);
+            // For pagination, we need to accumulate workflows
+            if (!this.state.allWorkflows) {
+              this.state.allWorkflows = [];
+            }
+            this.state.allWorkflows.push(...allWorkflows);
+            console.log(`Accumulated ${allWorkflows.length} more workflows, total: ${this.state.allWorkflows.length}`);
+          }
+
+          this.updateUI();
+
+        } catch (error) {
+          this.showError('Failed to load workflows: ' + error.message);
+        } finally {
+          this.state.isLoading = false;
+          // Hide inline loader when loading is complete
+          this.elements.inlineLoader.classList.add('hidden');
+        }
+      }
+
+      async loadAllWorkflowsForCategoryFiltering() {
+        const allWorkflows = [];
+        let currentPage = 1;
+        const maxPerPage = 100; // API limit
+        
+        while (true) {
+          const params = new URLSearchParams({
+            q: this.state.searchQuery,
+            trigger: this.state.filters.trigger,
+            complexity: this.state.filters.complexity,
+            active_only: this.state.filters.activeOnly,
+            page: currentPage,
+            per_page: maxPerPage
+          });
+
+          const response = await this.apiCall(`/workflows?${params}`);
+          allWorkflows.push(...response.workflows);
+          
+          console.log(`Loaded page ${currentPage}/${response.pages} (${response.workflows.length} workflows)`);
+          
+          if (currentPage >= response.pages) {
+            break;
+          }
+          
+          currentPage++;
+        }
+        
+        console.log(`Loaded total of ${allWorkflows.length} workflows for filtering`);
+        return allWorkflows;
+      }
+
+      async loadMoreWorkflowsForFiltering() {
+        // Load additional workflows to ensure we have enough for filtering
+        let currentPage = Math.ceil(this.state.allWorkflows.length / this.state.perPage) + 1;
+        const maxPages = 5; // Load up to 5 more pages
+        
+        for (let i = 0; i < maxPages; i++) {
+          const params = new URLSearchParams({
+            q: this.state.searchQuery,
+            trigger: this.state.filters.trigger,
+            complexity: this.state.filters.complexity,
+            active_only: this.state.filters.activeOnly,
+            page: currentPage + i,
+            per_page: this.state.perPage
+          });
+
+          try {
+            const response = await this.apiCall(`/workflows?${params}`);
+            if (response.workflows && response.workflows.length > 0) {
+              this.state.allWorkflows.push(...response.workflows);
+              console.log(`Loaded additional ${response.workflows.length} workflows for filtering, total: ${this.state.allWorkflows.length}`);
+            } else {
+              break; // No more workflows to load
+            }
+          } catch (error) {
+            console.log('No more workflows to load');
+            break;
+          }
+        }
+      }
+
+      getWorkflowCategory(filename) {
+        // First try to get category from enhanced workflow data
+        if (this.state.enhancedWorkflows && this.state.enhancedWorkflows.length > 0) {
+          const enhancedWorkflow = this.state.enhancedWorkflows.find(w => w.filename === filename);
+          if (enhancedWorkflow && enhancedWorkflow.category) {
+            return enhancedWorkflow.category;
+          }
+        }
+        
+        // Fall back to old category mapping system
+        const category = this.state.categoryMap.get(filename);
+        const result = category && category.trim() ? category : 'Uncategorized';
+        
+        // Debug logging for category lookup
+        if (!category) {
+          console.log(`No category found for workflow: ${filename}, using 'Uncategorized'`);
+        }
+        
+        return result;
+      }
+
+      async loadMoreWorkflows() {
+        if (this.state.currentPage >= this.state.totalPages) return;
+
+        // Show inline loader for loading more workflows
+        this.elements.inlineLoader.classList.remove('hidden');
+        
+        this.state.currentPage++;
+        
+        // If a category is selected, load more workflows for that category
+        if (this.state.selectedCategory && this.state.selectedCategory !== 'all') {
+          await this.loadMoreWorkflowsForCategory(this.state.selectedCategory);
+        } else {
+          // Load more workflows normally
+          await this.loadWorkflows(false);
+        }
+      }
+
+      async loadMoreWorkflowsForCategory(category) {
+        try {
+          // Load more workflows for the specific category
+          const currentCount = this.state.workflows.length;
+          const additionalWorkflows = await this.loadAdditionalWorkflowsForCategory(category, currentCount);
+          
+          if (additionalWorkflows.length > 0) {
+            // Add new workflows to the current display
+            this.state.workflows.push(...additionalWorkflows);
+            this.renderWorkflows(this.state.workflows);
+            
+            console.log(`Loaded ${additionalWorkflows.length} more workflows for category: ${category}, total: ${this.state.workflows.length}`);
+          } else {
+            console.log('No more workflows available for this category');
+          }
+        } catch (error) {
+          console.error('Error loading more workflows for category:', error);
+        } finally {
+          // Hide inline loader
+          this.elements.inlineLoader.classList.add('hidden');
+        }
+      }
+
+      async loadAdditionalWorkflowsForCategory(category, currentCount) {
+        // Load additional workflows that match the selected category
+        const additionalWorkflows = [];
+        const maxAdditional = 20; // Load up to 20 more workflows
+        
+        // Find workflows in allWorkflows that match the category and aren't already displayed
+        const availableWorkflows = this.state.allWorkflows.filter(workflow => {
+          const workflowCategory = this.getWorkflowCategory(workflow.filename);
+          return workflowCategory === category;
+        });
+        
+        // Get workflows that aren't already displayed
+        const newWorkflows = availableWorkflows.slice(currentCount, currentCount + maxAdditional);
+        
+        if (newWorkflows.length === 0) {
+          // If we don't have enough in allWorkflows, try to load more from API
+          return await this.loadMoreWorkflowsFromAPIForCategory(category, currentCount);
+        }
+        
+        return newWorkflows;
+      }
+
+      async loadMoreWorkflowsFromAPIForCategory(category, currentCount) {
+        // Load more workflows from API for the specific category
+        const additionalWorkflows = [];
+        const maxPages = 3; // Load up to 3 more pages
+        
+        for (let i = 0; i < maxPages; i++) {
+          const page = Math.ceil(currentCount / this.state.perPage) + i + 1;
+          
+          try {
+            const params = new URLSearchParams({
+              q: this.state.searchQuery,
+              trigger: this.state.filters.trigger,
+              complexity: this.state.filters.complexity,
+              active_only: this.state.filters.activeOnly,
+              page: page,
+              per_page: this.state.perPage
+            });
+
+            const response = await this.apiCall(`/workflows?${params}`);
+            
+            if (response.workflows && response.workflows.length > 0) {
+              // Filter workflows by category
+              const categoryWorkflows = response.workflows.filter(workflow => {
+                const workflowCategory = this.getWorkflowCategory(workflow.filename);
+                return workflowCategory === category;
+              });
+              
+              additionalWorkflows.push(...categoryWorkflows);
+              
+              // Add to allWorkflows for future filtering
+              this.state.allWorkflows.push(...response.workflows);
+              
+              if (categoryWorkflows.length < this.state.perPage) {
+                break; // No more workflows for this category
+              }
+            } else {
+              break; // No more workflows available
+            }
+          } catch (error) {
+            console.log('No more workflows to load from API');
+            break;
+          }
+        }
+        
+        return additionalWorkflows;
+      }
+
+      resetAndSearch() {
+        // Show inline loader when resetting search
+        this.elements.inlineLoader.classList.remove('hidden');
+        this.loadWorkflows(true);
+      }
+
+      updateUI() {
+        this.renderWorkflows();
+        this.updateLoadMoreButton();
+
+
+
+        if (this.state.workflows.length === 0) {
+          this.showState('no-results');
+        } else {
+          this.showState('content');
+        }
+      }
+
+      updateStatsDisplay(stats) {
+        this.elements.totalCount.textContent = stats.total.toLocaleString();
+        this.elements.activeCount.textContent = stats.active.toLocaleString();
+        this.elements.nodeCount.textContent = stats.total_nodes.toLocaleString();
+        this.elements.integrationCount.textContent = stats.unique_integrations.toLocaleString();
+      }
+
+
+
+      renderWorkflows(workflows = null) {
+        // Use passed workflows or fall back to state workflows
+        const workflowsToRender = workflows || this.state.workflows;
+        
+        console.log(`Rendering ${workflowsToRender.length} workflows`);
+        
+        const html = workflowsToRender.map(workflow => this.createWorkflowCard(workflow)).join('');
+        this.elements.workflowGrid.innerHTML = html;
+
+        // Add click handlers to cards
+        this.elements.workflowGrid.querySelectorAll('.workflow-card').forEach((card, index) => {
+          card.addEventListener('click', () => {
+            this.openWorkflowDetail(workflowsToRender[index]);
+          });
+        });
+
+        // Refresh scroll animations for new cards
+        this.refreshScrollAnimations();
+      }
+
+      createWorkflowCard(workflow) {
+        const statusClass = workflow.active ? 'status-active' : 'status-inactive';
+        const complexityClass = `complexity-${workflow.complexity}`;
+        const category = this.getWorkflowCategory(workflow.filename);
+
+        const integrations = workflow.integrations.slice(0, 5).map(integration =>
+          `<span class="integration-tag">${this.escapeHtml(integration)}</span>`
+        ).join('');
+
+        const moreIntegrations = workflow.integrations.length > 5
+          ? `<span class="integration-tag">+${workflow.integrations.length - 5}</span>`
+          : '';
+
+        return `
+                    <div class="workflow-card" data-filename="${workflow.filename}">
+                        <div class="workflow-header">
+                            <div class="workflow-meta">
+                                <div class="status-dot ${statusClass}"></div>
+                                <div class="complexity-dot ${complexityClass}"></div>
+                                <span>${workflow.node_count} nodes</span>
+                                <span class="category-badge">${this.escapeHtml(category)}</span>
+                            </div>
+                            <span class="trigger-badge">${this.escapeHtml(workflow.trigger_type)}</span>
+                        </div>
+                        
+                        <h3 class="workflow-title">${this.escapeHtml(workflow.name)}</h3>
+                        <p class="workflow-description">${this.escapeHtml(workflow.description)}</p>
+                        
+                        ${workflow.integrations.length > 0 ? `
+                            <div class="workflow-integrations">
+                                <h4 class="integrations-title">Integrations (${workflow.integrations.length})</h4>
+                                <div class="integrations-list">
+                                    ${integrations}
+                                    ${moreIntegrations}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+      }
+
+      async openWorkflowDetail(workflow) {
+        this.currentWorkflow = workflow;
+        this.elements.modalTitle.textContent = workflow.name;
+        this.elements.modalDescription.textContent = workflow.description;
+
+        // Update stats
+        const category = this.getWorkflowCategory(workflow.filename);
+        this.elements.modalStats.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                        <div><strong>Status:</strong> ${workflow.active ? 'Active' : 'Inactive'}</div>
+                        <div><strong>Trigger:</strong> ${workflow.trigger_type}</div>
+                        <div><strong>Complexity:</strong> ${workflow.complexity}</div>
+                        <div><strong>Nodes:</strong> ${workflow.node_count}</div>
+                        <div><strong>Category:</strong> ${this.escapeHtml(category)}</div>
+                    </div>
+                `;
+
+        // Update integrations
+        if (workflow.integrations.length > 0) {
+          this.elements.modalIntegrations.innerHTML = workflow.integrations
+            .map(integration => `<span class="integration-tag">${this.escapeHtml(integration)}</span>`)
+            .join(' ');
+        } else {
+          this.elements.modalIntegrations.textContent = 'No integrations found';
+        }
+
+        // Set download link with correct API URL
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const apiBaseUrl = isLocalhost ? 'http://127.0.0.1:8001' : '';
+        this.elements.downloadBtn.href = `${apiBaseUrl}/api/workflows/${workflow.filename}/download`;
+        this.elements.downloadBtn.download = workflow.filename;
+
+        // Reset view states
+        this.elements.jsonSection.classList.add('hidden');
+        this.elements.diagramSection.classList.add('hidden');
+
+        this.elements.workflowModal.classList.remove('hidden');
+      }
+
+      closeModal() {
+        this.elements.workflowModal.classList.add('hidden');
+        this.currentWorkflow = null;
+        this.currentJsonData = null;
+        this.currentDiagramData = null;
+
+        // Reset button states
+        this.elements.viewJsonBtn.textContent = '📄 View JSON';
+        this.elements.viewDiagramBtn.textContent = '📊 View Diagram';
+
+        // Reset copy button states
+        this.resetCopyButton('copyJsonBtn');
+        this.resetCopyButton('copyDiagramBtn');
+      }
+
+      async toggleJsonView() {
+        if (!this.currentWorkflow) return;
+
+        const isVisible = !this.elements.jsonSection.classList.contains('hidden');
+
+        if (isVisible) {
+          this.elements.jsonSection.classList.add('hidden');
+          this.elements.viewJsonBtn.textContent = '📄 View JSON';
+        } else {
+          try {
+            // Show loading state
+            this.elements.jsonViewer.textContent = '⏳ Loading workflow JSON...';
+            this.elements.jsonSection.classList.remove('hidden');
+            this.elements.viewJsonBtn.textContent = '📄 Hide JSON';
+            this.elements.viewJsonBtn.disabled = true;
+
+            const data = await this.apiCall(`/workflows/${this.currentWorkflow.filename}`);
+            const jsonString = JSON.stringify(data, null, 2);
+            this.currentJsonData = jsonString;
+            this.elements.jsonViewer.textContent = jsonString;
+          } catch (error) {
+            console.error('JSON loading error:', error);
+            if (error.message.includes('404')) {
+              this.elements.jsonViewer.textContent = '❌ Workflow file not found. The workflow may have been moved or deleted.';
+            } else if (error.message.includes('500')) {
+              this.elements.jsonViewer.textContent = '⚠️ Server error occurred while loading workflow. Please try again later.';
+            } else {
+              this.elements.jsonViewer.textContent = '❌ Error loading JSON: ' + error.message;
+            }
+            this.currentJsonData = null;
+          } finally {
+            this.elements.viewJsonBtn.disabled = false;
+          }
+        }
+      }
+
+      async toggleDiagramView() {
+        if (!this.currentWorkflow) return;
+
+        const isVisible = !this.elements.diagramSection.classList.contains('hidden');
+
+        if (isVisible) {
+          this.elements.diagramSection.classList.add('hidden');
+          this.elements.viewDiagramBtn.textContent = '📊 View Diagram';
+        } else {
+          try {
+            // Show loading state
+            this.elements.diagramViewer.textContent = '⏳ Generating workflow diagram...';
+            this.elements.diagramSection.classList.remove('hidden');
+            this.elements.viewDiagramBtn.textContent = '📊 Hide Diagram';
+            this.elements.viewDiagramBtn.disabled = true;
+
+            const data = await this.apiCall(`/workflows/${this.currentWorkflow.filename}/diagram`);
+            this.currentDiagramData = data.diagram;
+
+            // Create a Mermaid diagram that will be rendered
+            this.elements.diagramViewer.innerHTML = `
+                            <pre class="mermaid">${data.diagram}</pre>
+                        `;
+
+            // Re-initialize Mermaid for the new diagram
+            if (typeof mermaid !== 'undefined') {
+              mermaid.init(undefined, this.elements.diagramViewer.querySelector('.mermaid'));
+            }
+          } catch (error) {
+            console.error('Diagram loading error:', error);
+            if (error.message.includes('404')) {
+              this.elements.diagramViewer.textContent = '❌ Workflow file not found. The workflow may have been moved or deleted.';
+            } else if (error.message.includes('500')) {
+              this.elements.diagramViewer.textContent = '⚠️ Server error occurred while generating diagram. Please try again later.';
+            } else {
+              this.elements.diagramViewer.textContent = '❌ Error loading diagram: ' + error.message;
+            }
+            this.currentDiagramData = null;
+          } finally {
+            this.elements.viewDiagramBtn.disabled = false;
+          }
+        }
+      }
+
+      updateLoadMoreButton() {
+        const hasMore = this.state.currentPage < this.state.totalPages;
+
+        if (hasMore && this.state.workflows.length > 0) {
+          this.elements.loadMoreContainer.classList.remove('hidden');
+        } else {
+          this.elements.loadMoreContainer.classList.add('hidden');
+        }
+      }
+
+      showState(state) {
+        // Hide all states with smooth transitions
+        this.elements.inlineLoader.classList.add('hidden');
+        this.elements.errorState.classList.remove('visible');
+        this.elements.errorState.classList.add('hidden');
+        this.elements.noResultsState.classList.remove('visible');
+        this.elements.noResultsState.classList.add('hidden');
+        this.elements.workflowGrid.classList.remove('visible');
+        this.elements.workflowGrid.classList.add('hidden');
+
+        // Show the requested state with smooth transitions
+        switch (state) {
+          case 'loading':
+            this.elements.inlineLoader.classList.remove('hidden');
+            break;
+          case 'error':
+            this.elements.errorState.classList.remove('hidden');
+            this.elements.errorState.classList.add('visible');
+            break;
+          case 'no-results':
+            this.elements.noResultsState.classList.remove('hidden');
+            this.elements.noResultsState.classList.add('visible');
+            break;
+          case 'content':
+            this.elements.workflowGrid.classList.remove('hidden');
+            this.elements.workflowGrid.classList.add('visible');
+            // Remove inline loader from DOM to save vertical space
+            if (this.elements.inlineLoader && !this.elements.inlineLoader.classList.contains('hidden')) {
+              this.elements.inlineLoader.remove();
+            }
+            break;
+        }
+      }
+
+      showError(message) {
+        this.elements.errorMessage.textContent = message;
+        this.showState('error');
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      async copyToClipboard(text, buttonId) {
+        if (!text) {
+          console.warn('No content to copy');
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(text);
+          this.showCopySuccess(buttonId);
+        } catch (error) {
+          // Fallback for older browsers
+          this.fallbackCopyToClipboard(text, buttonId);
+        }
+      }
+
+      fallbackCopyToClipboard(text, buttonId) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          document.execCommand('copy');
+          this.showCopySuccess(buttonId);
+        } catch (error) {
+          console.error('Failed to copy text: ', error);
+        } finally {
+          document.body.removeChild(textArea);
+        }
+      }
+
+      showCopySuccess(buttonId) {
+        const button = document.getElementById(buttonId);
+        if (!button) return;
+
+        const originalText = button.innerHTML;
+        button.innerHTML = '✅ Copied!';
+        button.classList.add('copied');
+
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }
+
+      resetCopyButton(buttonId) {
+        const button = document.getElementById(buttonId);
+        if (!button) return;
+
+        button.innerHTML = '📋 Copy';
+        button.classList.remove('copied');
+      }
+    }
+
+    // Enhanced scroll animations with direction detection
+    function initScrollAnimations() {
+      let lastScrollY = window.scrollY;
+      let scrollDirection = 'down';
+      
+      // Track scroll direction
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+        lastScrollY = currentScrollY;
+      });
+
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add staggered delay based on position and scroll direction
+            const delay = scrollDirection === 'down' 
+              ? (index % 4) * 100  // Stagger for down scroll
+              : ((3 - (index % 4)) * 100); // Reverse stagger for up scroll
+            
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0) scale(1)';
+              entry.target.classList.add('animate-in');
+            }, delay);
+          } else {
+            // Reset animation when out of view
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(60px) scale(0.95)';
+            entry.target.classList.remove('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all workflow cards when they're added
+      const observeCards = () => {
+        const cards = document.querySelectorAll('.workflow-card');
+        cards.forEach((card, index) => {
+          if (!card.dataset.observed) {
+            card.dataset.observed = 'true';
+            // Reset initial state
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(60px) scale(0.95)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(card);
+          }
+        });
+      };
+
+      // Watch for new cards being added
+      const gridObserver = new MutationObserver(() => {
+        observeCards();
+      });
+
+      const workflowGrid = document.getElementById('workflowGrid');
+      if (workflowGrid) {
+        gridObserver.observe(workflowGrid, { childList: true });
+      }
+
+      // Initial observation
+      observeCards();
+    }
+
+    // Animated counting for stats
+    function animateCount(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16); // 60fps
+      const startTime = Date.now();
+      
+      function updateCount() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(target * easeOutQuart);
+        
+        element.textContent = current.toLocaleString();
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        } else {
+          element.textContent = target.toLocaleString();
+        }
+      }
+      
+      updateCount();
+    }
+
+    // Initialize stats animation
+    function initStatsAnimation() {
+      // Wait for stats to be visible, then animate
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Animate each stat with staggered timing
+            setTimeout(() => animateCount(document.getElementById('totalCount'), 2055), 100);
+            setTimeout(() => animateCount(document.getElementById('activeCount'), 215), 300);
+            setTimeout(() => animateCount(document.getElementById('nodeCount'), 29518), 500);
+            setTimeout(() => animateCount(document.getElementById('integrationCount'), 365), 700);
+            
+            // Only animate once
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      // Observe the stats section
+      const statsSection = document.querySelector('.stats');
+      if (statsSection) {
+        statsObserver.observe(statsSection);
+      }
+    }
+
+    // Initialize the app
+    document.addEventListener('DOMContentLoaded', () => {
+      workflowAppInstance = new WorkflowApp();
+      initScrollAnimations();
+      initStatsAnimation();
+    });
+  </script>
+  
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
